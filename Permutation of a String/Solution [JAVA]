@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class Solution {
+	public static String swap(String str, int index, int left){
+		StringBuilder temp = new StringBuilder(str);
+		char first = temp.charAt(index), second = temp.charAt(left);
+		temp.setCharAt(index, second);
+		temp.setCharAt(left, first);
+		
+		return temp.toString();
+	}
+	
+	public static void getSubSet(String str, int left, int right){
+		int index;
+		if(left == right){
+			System.out.println(str);
+			return;
+		}else{
+			for(index = left; index < right; index++){
+				str = swap(str, index, left);
+				getSubSet(str, left + 1, right);
+				str = swap(str, index, left);
+			}
+		}
+	}
+	
+	public static void main(String[] args){
+		Scanner input = new Scanner(System.in);
+		
+		String str = input.next();
+		getSubSet(str, 0, str.length());
+	}
+	
+}
