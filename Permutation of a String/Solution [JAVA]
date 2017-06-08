@@ -28,7 +28,7 @@ public class Solution {
 		Scanner input = new Scanner(System.in);
 		
 		String str = input.next();
-		getSubSet(str, 0, str.length());
+		getPermutation(str, 0, str.length());
 	}
 	
 }
