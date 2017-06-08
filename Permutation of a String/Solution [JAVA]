@@ -10,7 +10,7 @@ public class Solution {
 		return temp.toString();
 	}
 	
-	public static void getSubSet(String str, int left, int right){
+	public static void getPermutation(String str, int left, int right){
 		int index;
 		if(left == right){
 			System.out.println(str);
@@ -18,7 +18,7 @@ public class Solution {
 		}else{
 			for(index = left; index < right; index++){
 				str = swap(str, index, left);
-				getSubSet(str, left + 1, right);
+				getPermutation(str, left + 1, right);
 				str = swap(str, index, left);
 			}
 		}
