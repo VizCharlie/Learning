@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class Solution {
+	public static void getSubSet(String str, char[][] arr){
+		int index_x, index_y, col;
+		
+		for(index_x = 0; index_x < (1 << str.length()); index_x++){
+			col = 0;
+			for(index_y = 0; index_y < str.length(); index_y++){
+				if((index_x & (1 << index_y)) != 0){
+					arr[index_x][col] = str.charAt(index_y);
+					col++;
+				}
+			}
+		}
+		
+		for(char[] ch : arr){
+			System.out.println(ch);
+		}
+	}
+	
+	public static void main(String[] args){
+		Scanner input = new Scanner(System.in);
+		
+		String str = input.next();
+		char[][] arr = new char[(int) Math.pow(2, str.length())][str.length()];
+		getSubSet(str, arr);
+	}
+	
+}
