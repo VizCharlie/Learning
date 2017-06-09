@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class Solution {
+	static char[] operatorArr;
+	static boolean flag = false;
+	public static void getOperators(int[] operandArr, int left, int right, int midResult){
+		if(left == right){
+			if(midResult == operandArr[right]){
+				flag = true;
+			}			
+		}else{
+			operatorArr[left] = '+';
+			getOperators(operandArr, left + 1, right, midResult + operandArr[left]);
+			if(flag == true)
+				return;
+			operatorArr[left] = '-';
+			getOperators(operandArr, left + 1, right, midResult - operandArr[left]);
+		}
+			
+	}
+	
+	public static void main(String[] args){
+		Scanner input = new Scanner(System.in);
+		int index, midResult = 0;
+		int[] operandArr = new int[input.nextInt()];
+		
+		for(index = 0; index < operandArr.length; index++){
+			operandArr[index] = input.nextInt();
+		}
+		
+		operatorArr = new char[operandArr.length];
+		
+		getOperators(operandArr, 0, operandArr.length - 1, midResult);
+
+		if(flag == true){
+			for(index = 0; index < operatorArr.length; index++){
+				System.out.print(operatorArr[index] + " ");
+			}
+		}else{
+			System.out.println("NO SOLUTION");
+		}		
+	}	
+}
