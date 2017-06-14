@@ -1,0 +1,36 @@
+
+import java.util.*;
+
+public class sets {
+	static char[] operatorArr;
+	
+	public static void getOperators(String number, int left, int right){
+		int index;
+		
+		if(left == right){
+			for(index = 0; index < operatorArr.length; index++){
+				if(operatorArr[index] == '+'){
+					System.out.print(number.charAt(index)); //For unique values pass values to a set here and print value in Main from set.
+				}
+			}	
+			System.out.println();
+		}else{
+			operatorArr[left] = '+';
+			getOperators(number, left + 1, right);
+			operatorArr[left] = '-';
+			getOperators(number, left + 1, right);
+		}
+			
+	}
+	
+	public static void main(String[] args){
+		Scanner input = new Scanner(System.in);
+		int index, numLength;
+		String number = input.next();
+		
+		numLength = number.length();		
+		operatorArr = new char[numLength];
+		
+		getOperators(number, 0, numLength);
+	}
+}
