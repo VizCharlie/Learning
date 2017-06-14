@@ -1,0 +1,75 @@
+import java.util.*;
+
+public class LR {
+	static char[] operatorArr;
+	static int loc;
+	static Set<String> set = new HashSet<String>();
+	
+	public static void isSafe(String subString, int strLength){
+		int index, length = subString.length(), count = loc;
+		
+		for(index = 0; index < length; index++){
+			if(subString.charAt(index) == 'L'){
+				count--;
+				if(count < 0){
+					System.out.println("DEAD");
+					return;
+				}
+				
+			}else if(subString.charAt(index) == 'R'){
+				count++;
+				if(count > strLength){
+					System.out.println("DEAD");
+					return;
+				}
+			}			
+		}
+		
+		if(count < 0 || count > strLength){
+			System.out.println("DEAD.");
+		}else
+			System.out.println("SAFE.");
+	}
+	
+	public static void getOperators(String str, int left, int right){
+		int index;
+		String subString = "";
+		boolean flag = true;
+		
+		if(left == right){
+			for(index = 0; index < operatorArr.length; index++){
+				if(operatorArr[index] == '+'){
+					subString += str.charAt(index);
+				}
+				
+				if(subString.length() > 0){
+					set.add(subString);
+				}
+			}	
+			
+		}else{                                //Can also use 1 and 0 at place of + and -.
+			operatorArr[left] = '+';
+			getOperators(str, left + 1, right);
+			operatorArr[left] = '-';
+			getOperators(str, left + 1, right);
+		}
+			
+	}
+	
+	public static void main(String[] args){
+		Scanner input = new Scanner(System.in);
+		int index, strLength;
+		loc = input.nextInt() - 1;
+		String str = input.next().toUpperCase();
+		strLength = str.length();
+				
+		operatorArr = new char[strLength];
+		
+		getOperators(str, 0, strLength);
+		
+		for(String strSet : set){
+			System.out.print(strSet + '\t');
+			isSafe(strSet, strLength);
+		}
+	}
+}
