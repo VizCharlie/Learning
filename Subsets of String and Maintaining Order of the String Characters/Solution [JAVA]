@@ -14,7 +14,7 @@ public class sets {
 				}
 			}	
 			System.out.println();
-		}else{
+		}else{						//Can also use 1 and 0 in place of + and -
 			operatorArr[left] = '+';
 			getOperators(number, left + 1, right);
 			operatorArr[left] = '-';
